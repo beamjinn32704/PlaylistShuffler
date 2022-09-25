@@ -66,15 +66,13 @@ public class PlayListShuffler {
         String origPlaylistFileStr = findWplVersionTag();
         shuffledPlaylistFileStr = origPlaylistFileStr + "\n" + shuffledPlaylistFileStr;
         
-        System.out.println(shuffledPlaylistFileStr);
-//        
-//        //Write the shuffled playlist file to the playlist file
-//        try(PrintWriter writer = new PrintWriter(Main.endPlaylistFile)){
-//            writer.write(shuffledPlaylistFileStr);
-//        } catch (FileNotFoundException ex) {
-//            System.out.println(ex);
-//        }
-//        
+        //Write the shuffled playlist file to the playlist file
+        try(PrintWriter writer = new PrintWriter(Main.endPlaylistFile)){
+            writer.write(shuffledPlaylistFileStr);
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+        
         //Reset all variables
         resetVars();
     }
@@ -121,6 +119,7 @@ public class PlayListShuffler {
         in the song-tags-list with the shuffled list of song tags one-by-one.
         */
         int songsStartInd = -1;
+        
         ArrayList<HtmlTag> songTags = new ArrayList<>();
         for(int i = 0; i < playlistTags.size(); i++){
             HtmlTag tag = playlistTags.get(i);
@@ -133,6 +132,8 @@ public class PlayListShuffler {
                 }
                 songTags.add(tag);
             } else {
+                
+                
                 //If the tag isn't a sound, then there are two options. If no songs have been
                 //found, move on and do nothing. If a song has been found before, then the list
                 //of songs has ended, so stop the iteration.
@@ -144,6 +145,7 @@ public class PlayListShuffler {
                 }
             }
         }
+        
         if(songsStartInd == -1){
             //If there are no songs in the file given, then just return an empty HtmlElements object
             return new HtmlElements();
